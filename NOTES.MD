@@ -3,9 +3,13 @@
 - create react app
 - configured TailwindCss
 - Header
+- Routing of App
 - Login form
 - Singin Form
 - Sign up form
+- useRef hook
+- create Sign Up in firebase
+- created redux store with user slice
 
 # Features
  - Login/Signup Page
