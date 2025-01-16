@@ -1,13 +1,20 @@
 import { useNavigate } from "react-router-dom";
 import { auth } from "../utils/firebase";
-import { signOut } from "firebase/auth";
-import { useSelector } from "react-redux";
+import { signOut,onAuthStateChanged } from "firebase/auth";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { addUser, removeUser } from "../utils/userSlice";
+import { LOGO } from "../utils/constants";
+
 
 const Header = () => {
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const user = useSelector(store => store.user);
-  console.log(user);
+  
+
+  //handle sign out 
   const handleSignOut = () => {
     signOut(auth).then(() => {
       // Sign-out successful.
@@ -18,19 +25,54 @@ const Header = () => {
     });
   }
 
+  //as header is present all across the app we are keeping this logic here,whenever authChanged is called it will automatically 
+  //redirect him to if user is loged in ->> browse page
+  // if user is logged out ->> login/sign up page
+  //now our route is protected, if a user is not logged in he will not be able to move to browse page
+
+  //we are using useEffect here because we want this eventListener to be once so we keep the dependency array to be empty
+  //this will dispatch the action when user sign in /sign up/sign out
+  //we are checking auth evrry time page loads,if user is log in it will update the store by adding user
+  //if user logs out it will remove the user by removing it
+  useEffect(()=>{
+    const unsubscribe = onAuthStateChanged(auth
+      , (user) => {
+      if (user) {
+        //when user sign in 
+        const {uid,email,displayName,photoURL} = user;
+          dispatch(addUser({uid:uid,email:email,displayName:displayName,photoURL:photoURL}));
+          //after disptahcing the action and updating the slice 
+          //we automatically move to browse page
+          navigate("/browse");
+        // ...
+      } else {
+        // User is signed out
+        dispatch(removeUser());
+        //after we sign out and the user is removed we move
+        //back to our login sign up page
+        navigate("/");
+      }
+    });
+    
+    //whenver my comoponent unmounts unsubscribe is called
+    return () => unsubscribe();
+  },[])
+
   return (
     <div className="absolute w-screen px-8 py-2 bg-gradient-to-b from-black z-10 flex justify-between">
         <img
          className="w-44"
-         src="https://help.nflxext.com/helpcenter/OneTrust/oneTrust_production/consent/87b6a5c0-0104-4e96-a291-092c11350111/01938dc4-59b3-7bbc-b635-c4131030e85f/logos/dd6b162f-1a32-456a-9cfe-897231c7763c/4345ea78-053c-46d2-b11e-09adaef973dc/Netflix_Logo_PMS.png"
+         src={LOGO}
           alt="logo"  
         />
-        <div className="flex p-2">
+        {user && (
+          <div className="flex p-2">
           <img alt="usericon" className="h-12 w-12"
             src={user?.photoURL}
           />
           <button onClick={handleSignOut} className="font-bold text-white">(Sign Out)</button>
         </div>
+        )}   
     </div>
   )
 }
