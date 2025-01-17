@@ -32,6 +32,10 @@ get data fron tmdb now playing movies list api
 - emebeded the youtube video and make it autoplay and mute
 - tailwind classes to make main container look more awesome 
 - build our secondary container now
+- now we are building gpt search feature
+- GPT Search Page
+- Multi language Feature in our App
+- Integrate GPT API
 
 # Features
  - Login/Signup Page
