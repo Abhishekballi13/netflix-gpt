@@ -35,7 +35,9 @@
   },
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "@google/generative-ai": "^0.21.0",
     "@reduxjs/toolkit": "^2.5.0",
+    "openai": "^4.78.1",
     "react-redux": "^9.2.0",
     "react-router-dom": "^7.1.1",
     "tailwindcss": "^3.4.17",
