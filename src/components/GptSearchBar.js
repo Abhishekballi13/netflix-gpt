@@ -17,7 +17,7 @@ const GptSearchBar = () => {
          return json;
     }
     
-    const handleGptSearchClick = async () => {
+    const handleGptSearchClick = async () => {  
     // const { GoogleGenerativeAI } = require("@google/generative-ai");
       const genAI = new GoogleGenerativeAI(GEMINI_API);
       const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
@@ -37,8 +37,8 @@ const GptSearchBar = () => {
       dispatch(addGeminiMovieResult({movieNames : geminiMovies,movieResults : tmdbResults}));
     }
   return (
-    <div className='pt-[10%] flex justify-center'>
-        <form className='w-1/2 bg-black grid grid-cols-12' onSubmit={(e)=>e.preventDefault()}> 
+    <div className='pt-[30%] md:pt-[10%] flex justify-center'>
+        <form className='w-full md:w-1/2 bg-black grid grid-cols-12' onSubmit={(e)=>e.preventDefault()}> 
           <input ref = {searchText} type="text" className='p-4 m-4 col-span-9' placeholder={lang[langKey].gptSearchPlaceholder}></input>
           <button className='py-2 px-4 m-4 bg-red-700 rounded-lg col-span-3' onClick={handleGptSearchClick}>{lang[langKey].search}</button> 
         </form>

@@ -35,7 +35,15 @@ get data fron tmdb now playing movies list api
 - now we are building gpt search feature
 - GPT Search Page
 - Multi language Feature in our App
-- Integrate GPT API
+- Integrate Gemini API
+- created slice for gpt and added data there 
+- reused movie list component to make movie suggestion container
+- secret keys and info goes in .env file
+- add .env files
+- add .env file to gitignore
+- did memoization ,so that we dont make unecesssary api calls like when we move between pages we are again and again api calls
+so we subscribe to the store and only make call if no data is present for movies
+- made our app responsive
 
 # Features
  - Login/Signup Page
