@@ -19,6 +19,4 @@ export const SUPPORTED_LANGUAGES = [
   {identifier:"hindi",name:"Hindi"},
   {identifier:"spanish",name:"Spanish"}]
 
-export const OPENAI_KEY = "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"; 
-
 export const GEMINI_API = process.env.REACT_APP_GEMINI_API;
