@@ -78,6 +78,7 @@ const Header = () => {
          src={LOGO}
           alt="logo"  
         />
+        {!user && (<h2 className="text-white">* Please enable vpn to continue further!!!</h2>)}
         {user && (
           <div className="flex p-2 justify-between">
           {showGptSearch && (<select className="p-2 m-2 bg-gray-900 text-white" onChange={handleLanguageChange}>
