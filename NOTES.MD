@@ -59,3 +59,5 @@ so we subscribe to the store and only make call if no data is present for movies
   - NetflixGpt
     -  Search Bar
     - Movie suggestions
+
+- while deploying on vercel dont forget to add environment varibles there
